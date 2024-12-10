@@ -1,6 +1,6 @@
 .formBox {
   background-color: rgba(190, 242, 242, 0.882);
-  max-width: 400px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   border: 2px solid black;
