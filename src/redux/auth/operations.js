@@ -12,17 +12,16 @@ const setAuthHeader = (token) => {
 const clearAuthHeader = () => {
   goitApi.defaults.headers.common.Authorization = "";
 };
+
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      console.log("Sending request with credentials:", credentials);
       const response = await goitApi.post("/users/signup", credentials);
       setAuthHeader(response.data.token);
-      console.log("Response data:", response.data);
+
       return response.data;
     } catch (error) {
-      console.error("Error message:", error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -49,3 +48,23 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkAPI) => {
+    const savedToken = thunkAPI.getState().auth.token;
+    console.log(savedToken);
+
+    if (!savedToken) {
+      return thunkAPI.rejectWithValue("Token is not exist");
+    }
+
+    try {
+      setAuthHeader(savedToken);
+      const { data } = await goitApi.get("/users/current");
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

@@ -7,12 +7,20 @@ import ContactPage from "../pages/ContactsPage/ContactPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
 import Layout from "./Layout/Layout";
-import { Toaster } from "react-hot-toast";
+import { useEffect } from "react";
+import { refreshUser } from "../redux/auth/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsRefreshing } from "../redux/auth/selectors";
 
 function App() {
-  return (
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+  return isRefreshing ? null : (
     <div>
-      <Toaster />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
