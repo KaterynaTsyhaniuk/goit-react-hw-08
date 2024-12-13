@@ -2,8 +2,7 @@ import { Field, Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/auth/operations";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
-
-import ContactPage from "../../pages/ContactsPage/ContactPage";
+import { Navigate } from "react-router-dom";
 
 const LoginForm = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -19,7 +18,7 @@ const LoginForm = () => {
   };
 
   if (isLoggedIn) {
-    return <ContactPage to="/contacts" />;
+    return <Navigate to="/contacts" />;
   }
 
   return (
