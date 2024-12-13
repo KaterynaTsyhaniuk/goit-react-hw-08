@@ -31,8 +31,8 @@ function ContactForm() {
       .required("Requried"),
     number: Yup.string()
       .matches(
-        /^(?:\+?\d{1,3})?[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}$/,
-        "Required"
+        /^\+([1-9]\d{0,2})\d{7,12}$/,
+        "The phone number must be in the format +CountryCodeXXXXXXXXXX"
       )
       .min(7, "To short")
       .required("Required"),
