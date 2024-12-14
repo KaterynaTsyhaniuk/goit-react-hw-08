@@ -1,8 +1,7 @@
-/* src/index.css */
-
 body {
   font-family: sans-serif;
   line-height: 1.5;
+  background-color: rgb(10, 99, 99);
 }
 
 h1,
@@ -24,4 +23,8 @@ ol {
 img {
   display: block;
   max-width: 100%;
+}
+
+a {
+  color: inherit;
 }

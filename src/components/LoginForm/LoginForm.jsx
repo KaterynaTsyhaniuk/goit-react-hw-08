@@ -2,13 +2,24 @@ import { Field, Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/auth/operations";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import s from "./LoginForm.module.css";
 
 const LoginForm = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (values, options) => {
-    dispatch(login(values));
+    dispatch(login(values))
+      .unwrap()
+      .then((res) => {
+        toast(`Welcome ${res?.user?.name}`);
+        navigate("/contacts");
+      })
+      .catch(() => {
+        toast.error("Invalid login or password!");
+      });
     options.resetForm();
   };
 
@@ -22,14 +33,15 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className={s.boxLoginForm}>
+      <h2 className={s.loginText}>Login</h2>
       <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-        <Form>
+        <Form className={s.loginForm}>
           <Field
             name="email"
             placeholder="Enter email"
             autoComplete="username"
+            className={s.inputForm}
           />
           <Field
             name="password"
@@ -37,8 +49,11 @@ const LoginForm = () => {
             placeholder="Enter password"
             autoComplete="current-password"
             required
+            className={s.inputForm}
           />
-          <button type="submit">Submit</button>
+          <button type="submit" className={s.submitBtn}>
+            Submit
+          </button>
         </Form>
       </Formik>
     </div>

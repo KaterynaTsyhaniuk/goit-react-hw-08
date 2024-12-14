@@ -1,4 +1,6 @@
 .searshBox {
+  background-color: cadetblue;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -8,8 +10,9 @@
 }
 
 .searchInput {
-  background-color: white;
+  background-color: rgb(230, 246, 244);
   border-radius: 5px;
   padding-left: 10px;
   height: 30px;
+  border: none;
 }

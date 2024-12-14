@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import s from "./RegistrationForm.module.css";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -26,14 +27,16 @@ const RegistrationForm = () => {
     password: "",
   };
   return (
-    <div>
+    <div className={s.boxRegistrationForm}>
+      <h2 className={s.registrationText}>Registration</h2>
       <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-        <Form>
-          <Field name="name" placeholder="Enter name" />
+        <Form className={s.registrationForm}>
+          <Field name="name" placeholder="Enter name" className={s.inputForm} />
           <Field
             name="email"
             placeholder="Enter email"
             autoComplete="username"
+            className={s.inputForm}
           />
           <Field
             name="password"
@@ -41,8 +44,11 @@ const RegistrationForm = () => {
             placeholder="Enter pass"
             autoComplete="new-password"
             required
+            className={s.inputForm}
           />
-          <button type="submit">Submit</button>
+          <button type="submit" className={s.submitRegistrationBtn}>
+            Submit
+          </button>
         </Form>
       </Formik>
     </div>

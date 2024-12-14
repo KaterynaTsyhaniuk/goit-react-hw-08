@@ -12,7 +12,7 @@ const AppBar = () => {
   return (
     <header className={s.headerAppBar}>
       <Navigation />
-      {isLoggedIn && <div>Welcome, {user.email}</div>}
+      {isLoggedIn && <div className={s.welcomeBox}>Welcome, {user.email}</div>}
 
       {!isLoggedIn && <AuthNav />}
       {isLoggedIn && <UserMenu />}

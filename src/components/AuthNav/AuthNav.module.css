@@ -1,6 +1,6 @@
 .active {
   text-decoration: underline;
-  color: rgb(188, 146, 8);
+  color: cadetblue;
 }
 .navBox {
   display: flex;

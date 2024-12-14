@@ -7,6 +7,7 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 import Loader from "../../components/Loader/Loader";
 import ContactList from "../../components/ContactList/ContactList";
 import { selectError, selectLoading } from "../../redux/contacts/selections";
+import s from "./ContactPage.module.css";
 
 const ContactPage = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const ContactPage = () => {
 
   const error = useSelector(selectError);
   return (
-    <div>
+    <div className={s.contactPage}>
       {error && <p> Error: {error}</p>}
       <ContactForm />
       <SearchBox />
